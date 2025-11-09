@@ -1,0 +1,58 @@
+{
+  "name": "agentops",
+  "owner": {
+    "name": "Boden Fuller",
+    "email": "your@email.com"
+  },
+  "description": "Personal AgentOps marketplace demonstrating 12-Factor patterns with 3 focused plugins",
+  "version": "1.0.0",
+  "homepage": "https://github.com/boshu2/agentops",
+  "pluginRoot": "plugins",
+  "plugins": [
+    {
+      "name": "core-workflow",
+      "source": "./core-workflow",
+      "description": "Universal Research → Plan → Implement → Learn workflow (required base)",
+      "version": "1.0.0",
+      "author": "Boden Fuller",
+      "keywords": ["12-factor", "agentops", "workflow", "universal"],
+      "featured": true
+    },
+    {
+      "name": "devops-operations",
+      "source": "./devops-operations",
+      "description": "DevOps and platform engineering with Kubernetes, Helm, ArgoCD",
+      "version": "1.0.0",
+      "author": "Boden Fuller",
+      "keywords": ["devops", "kubernetes", "helm", "ci/cd"],
+      "dependencies": ["core-workflow"]
+    },
+    {
+      "name": "software-development",
+      "source": "./software-development",
+      "description": "Software development for Python, JavaScript, Go with testing",
+      "version": "1.0.0",
+      "author": "Boden Fuller",
+      "keywords": ["software-dev", "python", "javascript", "go"],
+      "dependencies": ["core-workflow"]
+    }
+  ],
+  "externalMarketplaces": [
+    {
+      "name": "aitmpl",
+      "source": "https://www.aitmpl.com/agents",
+      "description": "AI Template Marketplace - 63+ plugins, 85+ agents, curated collection",
+      "recommended": true
+    },
+    {
+      "name": "agents",
+      "source": {
+        "type": "github",
+        "owner": "wshobson",
+        "repo": "agents"
+      },
+      "description": "wshobson/agents - Open source repository, install via /plugin marketplace add",
+      "recommended": true
+    }
+  ]
+}
