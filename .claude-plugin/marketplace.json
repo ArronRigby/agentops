@@ -59,6 +59,16 @@
       },
       "description": "wshobson/agents - Open source repository, install via /plugin marketplace add",
       "recommended": true
+    },
+    {
+      "name": "claude-code-templates",
+      "source": {
+        "type": "github",
+        "owner": "davila7",
+        "repo": "claude-code-templates"
+      },
+      "description": "Claude Code Templates - 100+ ready-to-use templates (agents, commands, MCPs, hooks, skills)",
+      "recommended": true
     }
   ]
 }

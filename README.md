@@ -24,7 +24,7 @@ A minimal example marketplace for Claude Code that showcases:
 
 ### Access Referenced Marketplaces
 
-This marketplace references three production-ready marketplaces:
+This marketplace references four production-ready marketplaces:
 
 #### 1. AITMPL - AI Template Marketplace
 ```bash
@@ -43,7 +43,21 @@ This marketplace references three production-ready marketplaces:
 
 [→ View AITMPL marketplace](https://www.aitmpl.com/plugins)
 
-#### 2. Agents Marketplace (Open Source)
+#### 2. Claude Code Templates
+```bash
+/plugin marketplace add davila7/claude-code-templates
+```
+
+**100+ templates | Complete component library**
+- Ready-to-use agents, commands, MCPs, hooks, and skills
+- External service integrations (GitHub, PostgreSQL, Stripe, AWS, OpenAI)
+- Analytics and monitoring tools
+- Mobile-optimized conversation interface
+- NPM-based installation support
+
+[→ View claude-code-templates](https://github.com/davila7/claude-code-templates)
+
+#### 3. Agents Marketplace (Open Source)
 ```bash
 /plugin marketplace add wshobson/agents
 ```
@@ -57,7 +71,7 @@ This marketplace references three production-ready marketplaces:
 
 [→ View agents marketplace](https://github.com/wshobson/agents)
 
-#### 3. AgentOps Showcase (Production Patterns)
+#### 4. AgentOps Showcase (Production Patterns)
 ```bash
 /plugin marketplace add boshu2/agentops-showcase
 ```
@@ -253,6 +267,7 @@ Use to test:
 ### Referenced Marketplaces
 
 - [AITMPL](https://www.aitmpl.com/plugins) - AI Template Marketplace, 63+ plugins, comprehensive catalog
+- [Claude Code Templates](https://github.com/davila7/claude-code-templates) - 100+ ready-to-use templates
 - [wshobson/agents](https://github.com/wshobson/agents) - 63 plugins, open source collection
 - [boshu2/agentops-showcase](https://github.com/boshu2/agentops-showcase) - Production patterns
 
