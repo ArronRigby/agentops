@@ -1,287 +1,160 @@
-# AgentOps - Personal Claude Code Marketplace
+# AgentOps - Example Claude Code Marketplace
 
-> Personal marketplace demonstrating Claude Code plugin system with references to production marketplaces
+> A minimal example showing how to create your own Claude Code plugin marketplace
 
-A minimal example marketplace for Claude Code that showcases:
-- ✅ Official `.claude-plugin/marketplace.json` format
-- ✅ Links to external production marketplaces
-- ✅ Example plugin structure
-- ✅ AgentOps and 12-factor patterns
+## Goals
 
-## Quick Start
+1. **Showcase my plugins** - 3 example plugins demonstrating 12-Factor AgentOps patterns
+2. **Show how to create your own** - Simple, clear structure for building marketplaces
+3. **Link to better marketplaces** - Point to production-ready catalogs with 300+ plugins
 
-### Add This Marketplace
+---
+
+## My Example Plugins
+
+### Quick Install
 
 ```bash
 /plugin marketplace add boshu2/agentops
+/plugin install core-workflow@agentops
 ```
 
-### Install Example Plugin
+### What's Included
 
-```bash
-/plugin install example-plugin@agentops
-```
+**core-workflow** - Universal Research → Plan → Implement → Learn workflow
+- 4 agents for structured development phases
+- 5 commands for workflow orchestration
+- Base pattern for other plugins
 
-### Access Referenced Marketplaces
+**devops-operations** - Kubernetes, Helm, CI/CD automation
+- 3 agents for DevOps tasks
+- 3 commands for deployment workflows
+- Skills for GitOps patterns
 
-This marketplace references four production-ready marketplaces:
+**software-development** - Python, JavaScript, Go development
+- 3 agents for coding tasks
+- 3 commands for code workflows
+- Skills for testing patterns
 
-#### 1. AITMPL - AI Template Marketplace
-```bash
-# Agents collection
-/plugin marketplace add https://www.aitmpl.com/agents
+All plugins follow [12-Factor AgentOps](https://github.com/boshu2/12-factor-agentops) principles.
 
-# Plugins collection
-/plugin marketplace add https://www.aitmpl.com/plugins
-```
+---
 
-**63+ plugins | 85+ agents | Comprehensive catalog**
-- Curated AI agent and plugin templates
-- Multi-domain coverage (development, operations, creative)
-- Professional-grade tools
-- Regular updates and community curation
+## Create Your Own Marketplace
 
-[→ View AITMPL marketplace](https://www.aitmpl.com/plugins)
-
-#### 2. Claude Code Templates
-```bash
-/plugin marketplace add davila7/claude-code-templates
-```
-
-**100+ templates | Complete component library**
-- Ready-to-use agents, commands, MCPs, hooks, and skills
-- External service integrations (GitHub, PostgreSQL, Stripe, AWS, OpenAI)
-- Analytics and monitoring tools
-- Mobile-optimized conversation interface
-- NPM-based installation support
-
-[→ View claude-code-templates](https://github.com/davila7/claude-code-templates)
-
-#### 3. Agents Marketplace (Open Source)
-```bash
-/plugin marketplace add wshobson/agents
-```
-
-**63 plugins | 85 agents | 47 skills**
-- Full-stack development tools
-- Multi-agent orchestration
-- Language-specific plugins (Python, JS/TS, Rust, Go)
-- Infrastructure (Kubernetes, Cloud, CI/CD)
-- Security, quality, and performance tools
-
-[→ View agents marketplace](https://github.com/wshobson/agents)
-
-#### 4. AgentOps Showcase (Production Patterns)
-```bash
-/plugin marketplace add boshu2/agentops-showcase
-```
-
-**8 plugin profiles | 92 agents**
-- Production-tested from real GitOps operations
-- Platform engineering workflows
-- DevOps automation
-- SRE operations
-- Meta-operations (agents for managing agents)
-
-[→ View agentops-showcase](https://github.com/boshu2/agentops-showcase)
-
-## Repository Structure
+### 1. Repository Structure
 
 ```
-agentops/
+your-marketplace/
 ├── .claude-plugin/
-│   └── marketplace.json          # Marketplace metadata + external references
+│   └── marketplace.json          # Required: marketplace definition
 ├── plugins/
-│   └── example-plugin/
+│   └── your-plugin/
 │       ├── .claude-plugin/
-│       │   └── plugin.json       # Plugin metadata
-│       └── agents/
-│           └── example-agent.md  # Example agent
-├── README.md                     # This file
-└── LICENSE                       # Apache 2.0
+│       │   └── plugin.json       # Required: plugin manifest
+│       ├── agents/               # Optional: AI specialists
+│       ├── commands/             # Optional: slash commands
+│       └── README.md             # Recommended: documentation
+└── README.md                     # How to use your marketplace
 ```
 
-## Creating Your Own Plugins
-
-### 1. Create Plugin Directory
-
-```bash
-mkdir -p plugins/my-plugin/{.claude-plugin,agents}
-```
-
-### 2. Create Plugin Metadata
-
-**`plugins/my-plugin/.claude-plugin/plugin.json`:**
+### 2. Create marketplace.json
 
 ```json
 {
-  "name": "my-plugin",
-  "version": "1.0.0",
-  "description": "My custom plugin",
-  "author": "Your Name",
-  "license": "Apache-2.0",
-  "keywords": ["custom", "example"],
-  "components": {
-    "agents": ["agents/my-agent.md"],
-    "commands": [],
-    "hooks": [],
-    "mcp": []
-  }
-}
-```
-
-### 3. Create Agent
-
-**`plugins/my-plugin/agents/my-agent.md`:**
-
-```markdown
----
-name: my-agent
-description: My custom agent
-model: sonnet
-tools: [Read, Write, Bash]
----
-
-# My Agent
-
-Agent content here following the example-agent structure.
-```
-
-### 4. Register in Marketplace
-
-Add to `.claude-plugin/marketplace.json`:
-
-```json
-{
+  "name": "your-marketplace",
+  "owner": {
+    "name": "Your Name",
+    "email": "you@example.com"
+  },
   "plugins": [
     {
-      "name": "my-plugin",
-      "source": "./my-plugin",
-      "description": "My custom plugin",
+      "name": "your-plugin",
+      "source": "./your-plugin",
+      "description": "What your plugin does",
       "version": "1.0.0"
     }
   ]
 }
 ```
 
-## Marketplace Features
-
-### Plugin Sourcing
-
-Supports multiple source types:
+### 3. Create plugin.json
 
 ```json
 {
-  "plugins": [
-    {
-      "name": "local-plugin",
-      "source": "./local-plugin"
-    },
-    {
-      "name": "github-plugin",
-      "source": {
-        "type": "github",
-        "owner": "username",
-        "repo": "plugin-repo"
-      }
-    },
-    {
-      "name": "git-url",
-      "source": {
-        "type": "url",
-        "url": "https://gitlab.com/user/plugin.git"
-      }
-    }
-  ]
+  "name": "your-plugin",
+  "version": "1.0.0",
+  "description": "Plugin description",
+  "author": "Your Name",
+  "license": "Apache-2.0",
+  "components": {
+    "agents": ["agents/your-agent.md"],
+    "commands": ["commands/your-command.md"]
+  }
 }
 ```
 
-### External Marketplace References
+### 4. Share It
 
-Link to other marketplaces:
-
-```json
-{
-  "externalMarketplaces": [
-    {
-      "name": "agents",
-      "source": {
-        "type": "github",
-        "owner": "wshobson",
-        "repo": "agents"
-      },
-      "description": "Comprehensive marketplace",
-      "recommended": true
-    }
-  ]
-}
+```bash
+# Users install with:
+/plugin marketplace add your-github-username/your-repo
 ```
 
-## AgentOps Principles
+**Full documentation:** [Claude Code Plugin Marketplaces](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces)
 
-This marketplace demonstrates:
+---
 
-1. **Single Responsibility** - Each plugin does one thing well
-2. **Clear Contracts** - Explicit metadata and expectations
-3. **Composability** - Plugins work together
-4. **Discoverability** - Good descriptions and keywords
-5. **Versioning** - Semantic versioning for stability
-6. **Documentation** - Clear usage instructions
-7. **Examples** - Working demonstration code
-8. **Standards** - Following Claude Code plugin specification
+## Use Production Marketplaces Instead
 
-## Use Cases
+My marketplace is a simple example. For real work, use these comprehensive catalogs:
 
-### Personal Development
+### [AITMPL - AI Template Marketplace](https://www.aitmpl.com/plugins)
+```bash
+/plugin marketplace add https://www.aitmpl.com/agents
+/plugin marketplace add https://www.aitmpl.com/plugins
+```
+**63+ plugins | 85+ agents** - Curated professional tools for all domains
 
-Perfect for:
-- Learning the plugin system
-- Testing plugin structures
-- Building custom tools
-- Experimenting with agents
+### [Claude Code Templates](https://github.com/davila7/claude-code-templates)
+```bash
+/plugin marketplace add davila7/claude-code-templates
+```
+**100+ templates** - Complete component library with external integrations (GitHub, AWS, OpenAI)
 
-### Team Distribution
+### [wshobson/agents](https://github.com/wshobson/agents)
+```bash
+/plugin marketplace add wshobson/agents
+```
+**63 plugins | 85 agents | 47 skills** - Open source community collection
 
-Can be extended for:
-- Team-specific plugins
-- Internal tool distribution
-- Custom workflow automation
-- Organization-wide standards
+### [AgentOps Showcase](https://github.com/boshu2/agentops-showcase)
+```bash
+/plugin marketplace add boshu2/agentops-showcase
+```
+**92 agents** - Production-tested patterns from real GitOps operations
 
-### Integration Testing
+**Total ecosystem: 300+ plugins and agents** across these marketplaces.
 
-Use to test:
-- Marketplace integration
-- Plugin installation
-- Multi-marketplace setup
-- External references
+---
 
 ## Resources
 
-### Official Documentation
-
+**Official Documentation:**
 - [Claude Code Plugins](https://docs.claude.com/en/docs/claude-code/plugins)
 - [Plugin Marketplaces](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces)
-- [Subagents Guide](https://docs.claude.com/en/docs/claude-code/sub-agents)
+- [Plugin Reference](https://docs.claude.com/en/docs/claude-code/plugins-reference)
 
-### Referenced Marketplaces
-
-- [AITMPL](https://www.aitmpl.com/plugins) - AI Template Marketplace, 63+ plugins, comprehensive catalog
-- [Claude Code Templates](https://github.com/davila7/claude-code-templates) - 100+ ready-to-use templates
-- [wshobson/agents](https://github.com/wshobson/agents) - 63 plugins, open source collection
-- [boshu2/agentops-showcase](https://github.com/boshu2/agentops-showcase) - Production patterns
-
-### AgentOps Framework
-
-- [12-Factor AgentOps](https://github.com/boshu2/12-factor-agentops) - Operational framework
+**My Framework:**
+- [12-Factor AgentOps](https://github.com/boshu2/12-factor-agentops) - Operational patterns
 - [AgentOps Showcase](https://agentops-showcase.com) - Examples and tutorials
 
 ## License
 
-Apache 2.0 - See [LICENSE](LICENSE) file
+Apache 2.0 - See [LICENSE](LICENSE)
 
 ---
 
-**Created by**: Boden Fuller
-**Purpose**: Personal marketplace example + production marketplace references
-**Status**: Example/Educational
+**Created by:** Boden Fuller
+**Purpose:** Minimal marketplace example + links to better alternatives
+**Status:** Educational / Example
