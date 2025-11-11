@@ -19,7 +19,7 @@ from typing import Dict, List
 def load_plugin_json(path: Path) -> Dict:
     """Load and parse plugin.json."""
     try:
-        with open(path, 'r') as f:
+        with open(path, "r") as f:
             return json.load(f)
     except json.JSONDecodeError as e:
         print(f"❌ Invalid JSON in {path}: {e}")
@@ -32,16 +32,16 @@ def load_plugin_json(path: Path) -> Dict:
 def validate_required_fields(plugin_name: str, data: Dict) -> List[str]:
     """Validate required fields in plugin.json."""
     errors = []
-    required_fields = ['name', 'version', 'description', 'author', 'license']
+    required_fields = ["name", "version", "description", "author", "license"]
 
     for field in required_fields:
         if field not in data:
             errors.append(f"Missing required field: {field}")
 
     # Validate version format (semantic versioning)
-    if 'version' in data:
-        version = data['version']
-        parts = version.split('.')
+    if "version" in data:
+        version = data["version"]
+        parts = version.split(".")
         if len(parts) != 3:
             errors.append(f"Version must be semantic (X.Y.Z): {version}")
 
@@ -52,14 +52,14 @@ def validate_components(plugin_name: str, data: Dict, plugin_dir: Path) -> List[
     """Validate component declarations and files."""
     errors = []
 
-    if 'components' not in data:
+    if "components" not in data:
         errors.append("Missing 'components' field")
         return errors
 
-    components = data['components']
+    components = data["components"]
 
     # Validate each component type
-    component_types = ['agents', 'commands', 'skills', 'hooks', 'mcp']
+    component_types = ["agents", "commands", "skills", "hooks", "mcp"]
 
     for comp_type in component_types:
         if comp_type in components:
@@ -82,18 +82,18 @@ def validate_token_budget(plugin_name: str, data: Dict, plugin_dir: Path) -> Lis
     """Validate token budget estimation."""
     warnings = []
 
-    if 'tokenBudget' not in data:
+    if "tokenBudget" not in data:
         warnings.append("No tokenBudget field (recommended)")
         return warnings
 
-    budget = data['tokenBudget']
+    budget = data["tokenBudget"]
 
-    if 'estimated' not in budget or 'percentage' not in budget:
+    if "estimated" not in budget or "percentage" not in budget:
         warnings.append("tokenBudget missing 'estimated' or 'percentage'")
         return warnings
 
-    estimated = budget['estimated']
-    percentage = budget['percentage']
+    estimated = budget["estimated"]
+    percentage = budget["percentage"]
 
     # Calculate expected percentage (200k context window)
     expected_percentage = (estimated / 200000) * 100
@@ -111,7 +111,7 @@ def validate_token_budget(plugin_name: str, data: Dict, plugin_dir: Path) -> Lis
 
 def validate_plugin(plugin_dir: Path) -> tuple[bool, List[str], List[str]]:
     """Validate a single plugin."""
-    plugin_json = plugin_dir / '.claude-plugin' / 'plugin.json'
+    plugin_json = plugin_dir / ".claude-plugin" / "plugin.json"
     plugin_name = plugin_dir.name
 
     if not plugin_json.exists():
@@ -134,7 +134,7 @@ def validate_plugin(plugin_dir: Path) -> tuple[bool, List[str], List[str]]:
     warnings.extend(validate_token_budget(plugin_name, data, plugin_dir))
 
     # Check for README
-    if not (plugin_dir / 'README.md').exists():
+    if not (plugin_dir / "README.md").exists():
         warnings.append("Missing README.md (recommended)")
 
     success = len(errors) == 0
@@ -144,7 +144,7 @@ def validate_plugin(plugin_dir: Path) -> tuple[bool, List[str], List[str]]:
 def main():
     """Main validation function."""
     repo_root = Path(__file__).parent.parent
-    plugins_dir = repo_root / 'plugins'
+    plugins_dir = repo_root / "plugins"
 
     print("=================================")
     print("Plugin Manifest Validation")
@@ -217,5 +217,5 @@ def main():
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
