@@ -2,21 +2,72 @@
   "name": "agentops",
   "owner": {
     "name": "Boden Fuller",
-    "email": "your@email.com"
+    "email": "boden@fullerbt.com"
   },
-  "description": "Personal AgentOps marketplace demonstrating 12-Factor patterns with 3 focused plugins",
-  "version": "1.0.0",
+  "description": "AgentOps marketplace - 12-Factor patterns, vibe-coding framework, multi-agent coordination, and production-ready plugins",
+  "version": "3.0.0",
   "homepage": "https://github.com/boshu2/agentops",
   "pluginRoot": "plugins",
   "plugins": [
+    {
+      "name": "constitution",
+      "source": "./constitution",
+      "description": "Foundational laws, guardrails, and constitutional rules - The Six Laws of an Agent",
+      "version": "1.0.0",
+      "author": "Boden Fuller",
+      "keywords": ["laws", "guardrails", "constitution", "governance", "40-percent-rule"],
+      "featured": true,
+      "components": {
+        "agents": ["guardian"],
+        "skills": ["laws-of-an-agent", "context-engineering", "git-discipline"]
+      }
+    },
     {
       "name": "core-workflow",
       "source": "./core-workflow",
       "description": "Universal Research → Plan → Implement → Learn workflow (required base)",
       "version": "1.0.0",
       "author": "Boden Fuller",
-      "keywords": ["12-factor", "agentops", "workflow", "universal"],
-      "featured": true
+      "keywords": ["12-factor", "agentops", "workflow", "universal", "rpi"],
+      "dependencies": ["constitution"],
+      "featured": true,
+      "components": {
+        "agents": ["research-agent", "plan-agent", "implement-agent", "learn-agent"],
+        "commands": ["research", "plan", "implement", "learn", "workflow"]
+      }
+    },
+    {
+      "name": "session-management",
+      "source": "./session-management",
+      "description": "Session continuity, context bundling, and progress tracking for multi-session work",
+      "version": "1.0.0",
+      "author": "Boden Fuller",
+      "keywords": ["session", "context", "bundles", "progress", "continuity"],
+      "dependencies": ["core-workflow"],
+      "featured": true,
+      "components": {
+        "agents": ["context-manager"],
+        "commands": ["session-start", "session-end", "session-resume", "bundle-save", "bundle-load", "progress-update"],
+        "skills": ["context-bundling", "progress-tracking"]
+      }
+    },
+    {
+      "name": "vibe-coding",
+      "source": "./vibe-coding",
+      "description": "Vibe Coding framework - 5 metrics, 6 levels, 12 failure patterns, tracer tests",
+      "version": "1.0.0",
+      "author": "Boden Fuller",
+      "keywords": ["vibe-coding", "metrics", "ai-assisted", "productivity", "tracer-tests"],
+      "dependencies": ["core-workflow"],
+      "featured": true,
+      "tools": {
+        "npm": "@boshu2/vibe-check"
+      },
+      "components": {
+        "commands": ["vibe-level", "vibe-check", "vibe-retro"],
+        "skills": ["vibe-check", "vibe-level", "tracer-test"],
+        "agents": ["vibe-assessor"]
+      }
     },
     {
       "name": "devops-operations",
@@ -24,16 +75,16 @@
       "description": "DevOps and platform engineering with Kubernetes, Helm, ArgoCD",
       "version": "1.0.0",
       "author": "Boden Fuller",
-      "keywords": ["devops", "kubernetes", "helm", "ci/cd"],
+      "keywords": ["devops", "kubernetes", "helm", "ci/cd", "gitops"],
       "dependencies": ["core-workflow"]
     },
     {
       "name": "software-development",
       "source": "./software-development",
-      "description": "Software development for Python, JavaScript, Go with testing",
+      "description": "Software development for Python, JavaScript, Go with testing patterns",
       "version": "1.0.0",
       "author": "Boden Fuller",
-      "keywords": ["software-dev", "python", "javascript", "go"],
+      "keywords": ["software-dev", "python", "javascript", "go", "tdd"],
       "dependencies": ["core-workflow"]
     }
   ],

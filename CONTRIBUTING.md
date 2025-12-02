@@ -449,8 +449,6 @@ Created plugin with:
 ## Impact
 Enables users to [specific capability].
 
-🤖 Generated with Claude Code
-Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
 
 ### 3. Push and Create PR

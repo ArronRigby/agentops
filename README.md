@@ -1,92 +1,158 @@
-# AgentOps - Example Claude Code Marketplace
+# AgentOps - Claude Code Plugin Marketplace
 
-> A minimal example showing how to create your own Claude Code plugin marketplace
+> **Production-ready patterns for AI-assisted development**
 
-## Goals
+## What's Inside
 
-1. **Showcase my plugins** - 3 example plugins demonstrating 12-Factor AgentOps patterns
-2. **Show how to create your own** - Simple, clear structure for building marketplaces
-3. **Link to better marketplaces** - Point to production-ready catalogs with 300+ plugins
+**6 plugins** demonstrating 12-Factor AgentOps principles:
+
+| Plugin | Description | Highlights |
+|--------|-------------|------------|
+| **constitution** | Foundational laws and guardrails | Six Laws, 40% Rule, Git Discipline |
+| **core-workflow** | Research → Plan → Implement → Learn | 4 agents, 5 commands |
+| **session-management** | Long-lived sessions that survive context resets | Bundles, progress.json, session protocol |
+| **vibe-coding** | 5 metrics, 6 levels, 12 failure patterns | Tracer tests, vibe-check CLI |
+| **devops-operations** | Kubernetes, Helm, ArgoCD patterns | GitOps workflows |
+| **software-development** | Python, JavaScript, Go development | TDD patterns |
 
 ---
 
-## My Example Plugins
-
-### Quick Install
+## Quick Install
 
 ```bash
+# Add marketplace
 /plugin marketplace add boshu2/agentops
+
+# Install featured plugins
+/plugin install constitution@agentops
+/plugin install core-workflow@agentops
+/plugin install session-management@agentops
+/plugin install vibe-coding@agentops
+```
+
+---
+
+## Featured Plugins
+
+### Constitution (Foundation)
+
+**The rules that govern all agent operations.**
+
+- **Six Laws of an Agent** - Extract learnings, improve systems, document context
+- **40% Rule** - Never exceed 40% token budget
+- **Git Discipline** - Semantic commits, Knowledge OS patterns
+
+```bash
+/plugin install constitution@agentops
+```
+
+### Core Workflow (Required Base)
+
+**Universal Research → Plan → Implement → Learn workflow.**
+
+- 4 specialized agents (research, plan, implement, learn)
+- 5 commands for workflow orchestration
+- Human gates between phases
+
+```bash
 /plugin install core-workflow@agentops
 ```
 
-### What's Included
+### Session Management (Long-Lived Sessions)
 
-**core-workflow** - Universal Research → Plan → Implement → Learn workflow
-- 4 agents for structured development phases
-- 5 commands for workflow orchestration
-- Base pattern for other plugins
+**The real solution for multi-day projects.**
 
-**devops-operations** - Kubernetes, Helm, CI/CD automation
-- 3 agents for DevOps tasks
-- 3 commands for deployment workflows
-- Skills for GitOps patterns
+AI agents have goldfish memory - each session starts fresh. Session Management solves this:
 
-**software-development** - Python, JavaScript, Go development
-- 3 agents for coding tasks
-- 3 commands for code workflows
-- Skills for testing patterns
+- **Context Bundling** - Compress 60k tokens to 2-3k, survive context resets
+- **Progress Tracking** - `claude-progress.json` tracks state across sessions
+- **Session Protocol** - `/session-start`, `/session-end`, `/session-resume`
 
-All plugins follow [12-Factor AgentOps](https://github.com/boshu2/12-factor-agentops) principles.
+```bash
+# Day 1
+/session-start
+# ... work ...
+/bundle-save my-feature-research
+/session-end
+
+# Day 2
+/session-resume
+# Picks up exactly where you left off
+```
+
+```bash
+/plugin install session-management@agentops
+```
+
+### Vibe Coding
+
+**Measure and improve AI-assisted development.**
+
+- **5 Core Metrics** - Iteration velocity, rework ratio, trust pass rate
+- **6 Vibe Levels** - Classify task difficulty (0-5)
+- **Tracer Tests** - Validate assumptions before coding
+
+```bash
+npm install -g @boshu2/vibe-check
+/plugin install vibe-coding@agentops
+```
 
 ---
 
-## Create Your Own Marketplace
+## The 12 Factors
 
-### 1. Repository Structure
+| Factor | Description |
+|--------|-------------|
+| I | Git Memory - Commits as knowledge writes |
+| II | JIT Context - Load only what's needed |
+| III | Single Responsibility - One agent = one job |
+| IV | Validation Gates - Verify before proceeding |
+| V | Operational Telemetry - Track metrics |
+| VI | Session Continuity - Bundles preserve state |
+| VII | Intelligent Routing - Route to right specialist |
+| VIII | Human Gate Reviews - Approval at key points |
+| IX | Pattern Extraction - Capture reusables |
+| X | Continuous Improvement - Identify improvements |
+| XI | Constitutional Guardrails - Enforce rules |
+| XII | Domain Portability - Works across domains |
+
+---
+
+## Plugin Dependency Graph
 
 ```
-your-marketplace/
+constitution (foundation)
+    └── core-workflow (required base)
+            ├── session-management
+            ├── vibe-coding
+            ├── devops-operations
+            └── software-development
+```
+
+---
+
+## Create Your Own Plugin
+
+### Structure
+
+```
+plugins/your-plugin/
 ├── .claude-plugin/
-│   └── marketplace.json          # Required: marketplace definition
-├── plugins/
-│   └── your-plugin/
-│       ├── .claude-plugin/
-│       │   └── plugin.json       # Required: plugin manifest
-│       ├── agents/               # Optional: AI specialists
-│       ├── commands/             # Optional: slash commands
-│       └── README.md             # Recommended: documentation
-└── README.md                     # How to use your marketplace
+│   └── plugin.json       # Required: manifest
+├── agents/               # AI specialists
+├── commands/             # Slash commands
+├── skills/               # Knowledge modules
+└── README.md             # Documentation
 ```
 
-### 2. Create marketplace.json
-
-```json
-{
-  "name": "your-marketplace",
-  "owner": {
-    "name": "Your Name",
-    "email": "you@example.com"
-  },
-  "plugins": [
-    {
-      "name": "your-plugin",
-      "source": "./your-plugin",
-      "description": "What your plugin does",
-      "version": "1.0.0"
-    }
-  ]
-}
-```
-
-### 3. Create plugin.json
+### Plugin Manifest
 
 ```json
 {
   "name": "your-plugin",
   "version": "1.0.0",
-  "description": "Plugin description",
-  "author": "Your Name",
-  "license": "Apache-2.0",
+  "description": "What your plugin does",
+  "dependencies": ["core-workflow"],
   "components": {
     "agents": ["agents/your-agent.md"],
     "commands": ["commands/your-command.md"]
@@ -94,60 +160,27 @@ your-marketplace/
 }
 ```
 
-### 4. Share It
-
-```bash
-# Users install with:
-/plugin marketplace add your-github-username/your-repo
-```
-
-**Full documentation:** [Claude Code Plugin Marketplaces](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces)
-
 ---
 
-## Use Production Marketplaces Instead
+## Other Marketplaces
 
-My marketplace is a simple example. For real work, use these comprehensive catalogs:
+For more plugins, check these comprehensive catalogs:
 
-### [AITMPL - AI Template Marketplace](https://www.aitmpl.com/plugins)
-```bash
-/plugin marketplace add https://www.aitmpl.com/agents
-/plugin marketplace add https://www.aitmpl.com/plugins
-```
-**63+ plugins | 85+ agents** - Curated professional tools for all domains
-
-### [Claude Code Templates](https://github.com/davila7/claude-code-templates)
-```bash
-/plugin marketplace add davila7/claude-code-templates
-```
-**100+ templates** - Complete component library with external integrations (GitHub, AWS, OpenAI)
-
-### [wshobson/agents](https://github.com/wshobson/agents)
-```bash
-/plugin marketplace add wshobson/agents
-```
-**63 plugins | 85 agents | 47 skills** - Open source community collection
-
-### [AgentOps Showcase](https://github.com/boshu2/agentops-showcase)
-```bash
-/plugin marketplace add boshu2/agentops-showcase
-```
-**92 agents** - Production-tested patterns from real GitOps operations
-
-**Total ecosystem: 300+ plugins and agents** across these marketplaces.
+| Marketplace | Size | Install |
+|-------------|------|---------|
+| [AITMPL](https://www.aitmpl.com) | 63+ plugins, 85+ agents | `/plugin marketplace add https://www.aitmpl.com/agents` |
+| [Claude Code Templates](https://github.com/davila7/claude-code-templates) | 100+ templates | `/plugin marketplace add davila7/claude-code-templates` |
+| [wshobson/agents](https://github.com/wshobson/agents) | 63 plugins | `/plugin marketplace add wshobson/agents` |
 
 ---
 
 ## Resources
 
-**Official Documentation:**
-- [Claude Code Plugins](https://docs.claude.com/en/docs/claude-code/plugins)
-- [Plugin Marketplaces](https://docs.claude.com/en/docs/claude-code/plugin-marketplaces)
-- [Plugin Reference](https://docs.claude.com/en/docs/claude-code/plugins-reference)
+- [12-Factor AgentOps](https://github.com/boshu2/12-factor-agentops) - Full framework documentation
+- [vibe-check npm](https://www.npmjs.com/package/@boshu2/vibe-check) - CLI metrics tool
+- [Claude Code Plugins Docs](https://docs.claude.com/en/docs/claude-code/plugins) - Official documentation
 
-**My Framework:**
-- [12-Factor AgentOps](https://github.com/boshu2/12-factor-agentops) - Operational patterns
-- [AgentOps Showcase](https://agentops-showcase.com) - Examples and tutorials
+---
 
 ## License
 
@@ -156,5 +189,5 @@ Apache 2.0 - See [LICENSE](LICENSE)
 ---
 
 **Created by:** Boden Fuller
-**Purpose:** Minimal marketplace example + links to better alternatives
-**Status:** Educational / Example
+**Purpose:** Production-ready AgentOps patterns
+**Status:** Production
