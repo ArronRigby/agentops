@@ -50,6 +50,19 @@
 
 **Universal Research → Plan → Implement → Learn workflow.**
 
+```mermaid
+graph LR
+    R["Research<br/><i>explore options</i>"] -->|bundle| P["Plan<br/><i>specify changes</i>"]
+    P -->|spec| I["Implement<br/><i>execute & validate</i>"]
+    I -->|patterns| L["Learn<br/><i>extract insights</i>"]
+    L -.->|next iteration| R
+
+    style R fill:#3498db,stroke:#2980b9,color:#fff
+    style P fill:#9b59b6,stroke:#8e44ad,color:#fff
+    style I fill:#2ecc71,stroke:#27ae60,color:#fff
+    style L fill:#f39c12,stroke:#d68910,color:#fff
+```
+
 - 4 specialized agents (research, plan, implement, learn)
 - 5 commands for workflow orchestration
 - Human gates between phases
@@ -120,13 +133,20 @@ npm install -g @boshu2/vibe-check
 
 ## Plugin Dependency Graph
 
-```
-constitution (foundation)
-    └── core-workflow (required base)
-            ├── session-management
-            ├── vibe-coding
-            ├── devops-operations
-            └── software-development
+```mermaid
+graph TD
+    A["constitution<br/><i>foundation</i>"] --> B["core-workflow<br/><i>required base</i>"]
+    B --> C["session-management"]
+    B --> D["vibe-coding"]
+    B --> E["devops-operations"]
+    B --> F["software-development"]
+
+    style A fill:#1a1a2e,stroke:#16213e,color:#eee
+    style B fill:#16213e,stroke:#0f3460,color:#eee
+    style C fill:#0f3460,stroke:#e94560,color:#eee
+    style D fill:#0f3460,stroke:#e94560,color:#eee
+    style E fill:#0f3460,stroke:#e94560,color:#eee
+    style F fill:#0f3460,stroke:#e94560,color:#eee
 ```
 
 ---
