@@ -247,6 +247,30 @@ See: `.agents/specs/conflict-resolution-algorithm.md`
 
 ---
 
+## Verdict Computation
+
+Uses council consensus rules to determine final verdict:
+
+| Condition | Verdict |
+|-----------|---------|
+| All PASS | PASS |
+| Any FAIL | FAIL |
+| Mixed PASS/WARN | WARN |
+| Cross-vendor disagree | DISAGREE (surface both, defer to human) |
+
+## Contradiction Handling
+
+When agents explicitly contradict (one says "secure", another says "vulnerable"):
+
+1. Flag as **CONTESTED** finding
+2. Include both positions with reasoning
+3. Escalate to human review
+4. Do NOT auto-resolve contradictions — they signal genuine uncertainty
+
+Contested findings are surfaced prominently in the report with both agent positions side-by-side.
+
+---
+
 ## Related
 
 - Pre-mortem: `.agents/pre-mortems/2026-01-26-flatten-skill-nesting.md` (Finding #3)
