@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "epic": "ag-l2pu",
+  "total_waves": 4,
+  "timestamp": "2026-02-15T14:50:00-05:00",
+  "tasks_completed": ["ag-l2pu.1", "ag-l2pu.2", "ag-l2pu.3", "ag-l2pu.4", "ag-l2pu.5"],
+  "tasks_failed": [],
+  "output_file": ".agents/research/2026-02-15-vibe-check-detectors-metrics.md",
+  "output_lines": 1841
+}
