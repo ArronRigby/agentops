@@ -1,0 +1,4 @@
+# Do not commit this directory — session artifacts, absolute paths, sensitive output.
+*
+!.gitignore
+!README.md
